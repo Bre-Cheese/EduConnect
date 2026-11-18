@@ -78,7 +78,7 @@ public:
           head = temp;
           tail = temp;
        }
-       tail->next = nullptr;
+       tail->next = temp;
        tail = temp;
     }
 
