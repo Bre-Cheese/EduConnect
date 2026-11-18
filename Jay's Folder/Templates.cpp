@@ -1,6 +1,101 @@
 #include <iostream>
 #include "Templates.h"
 
+//User Template
+//Constructor / Destructor Functions
+template<class T>
+User<T>::User()
+{
+}
+template<class T>
+User<T>::User(T Email, T Name) : Email(Email), Name(Name)
+{
+}
+template<class T>
+User<T>::~User()
+{
+}
+//Get Functions
+template<class T>
+T& User<T>::getContact()
+{
+  return Email;
+}
+template<class T>
+T& User<T>::getName()
+{
+  return Name;
+}
+//Set Functions
+template<class T>
+void User<T>::setContact(T e)
+{
+  Email = e;
+}
+template<class T>
+void User<T>::setName(T n)
+{
+  Name = n;
+}
+
+
+
+//Student Template
+//Constructor / Destructor Functions
+template<class T>
+Student<T>::Student()
+{
+}
+template<class T>
+Student<T>::Student(T Email, T Name) : Email(Email), Name(Name)
+{
+}
+template<class T>
+Student<T>::~Student()
+{
+}
+// template<class T>
+// void Student<T>::setToRequest(Request<T> *n)
+// {
+//   next = n;
+// }
+// template<class T>
+// Request<T>* Student<T>::getToRequest()
+// {
+//   return request;
+// }
+
+
+
+//Tutor Template
+//Constructor / Destructor Functions
+template<class T>
+Tutor<T>::Tutor()
+{
+  Subject = "N/A";
+}
+template<class T>
+Tutor<T>::Tutor(T Email, T Name) : Email(Email), Name(Name)
+{
+  Subject = "N/A";
+}
+template<class T>
+Tutor<T>::~Tutor()
+{
+}
+template<class T>
+string Tutor<T>::getSubject()
+{
+  return Subject;
+}
+template<class T>
+void Tutor<T>::setSubject(string s)
+{
+  Subject = s;
+}
+
+
+
 //Request Template
 //Constructor / Destructor Functions
 template<class T>
@@ -8,23 +103,22 @@ Request<T>::Request()
 {
  next = nullptr;
  prev = nullptr;
+ student = nullptr;
+ tutor = nullptr;
 }
 template<class T>
-Request<T>::Request(int RequestNum, T Subject, T Description, T Urgency) : RequestNum(RequestNum), Subject(Subject),  Description(Description), Urgency(Urgency)
+Request<T>::Request(T Subject, T Description, T Urgency) : Subject(Subject),  Description(Description), Urgency(Urgency)
 {
  next = nullptr;
  prev = nullptr;
+ student = nullptr;
+ tutor = nullptr;
 }
 template<class T>
 Request<T>::~Request()
 {
 }
 //Get Functions
-template<class T>
-int Request<T>::getRequestNum()
-{
-  return RequestNum;
-}
 template<class T>
 T& Request<T>::getSubject()
 {
@@ -46,11 +140,6 @@ T& Request<T>::getStatus()
   return Status;
 }
 //Set Functions
-template<class T>
-void Request<T>::setRequestNum(int r)
-{
-  RequestNum = r;
-}
 template<class T>
 void Request<T>::setSubject(T s)
 {
@@ -83,9 +172,14 @@ Request<T>* Request<T>::getPrevRequest()
   return prev;
 }
 template<class T>
-Student<T>* Request<T>::getBackToStudent()
+Student<T>* Request<T>::getToStudent()
 {
-  return back;
+  return student;
+}
+template<class T>
+Tutor<T>* Request<T>::getToTutor()
+{
+  return tutor;
 }
 template<class T>
 void Request<T>::setNextRequest(Request *n)
@@ -97,58 +191,13 @@ void Request<T>::setPrevRequest(Request *p)
 {
   prev = p;
 }
-
-
-
-
-//Student Template
-//Constructor / Destructor Functions
 template<class T>
-Student<T>::Student()
+void Request<T>::setToStudent(Student<T> *s)
 {
- request = nullptr;
- NumRequests = 0;
+  student = s;
 }
 template<class T>
-Student<T>::Student(T Email, T Name) : Email(Email), Name(Name)
+void Request<T>::setToTutor(Tutor<T> *t)
 {
- request = nullptr;
- NumRequests = 0;
-}
-template<class T>
-Student<T>::~Student()
-{
-}
-//Get Functions
-template<class T>
-T& Student<T>::getContact()
-{
-  return Email;
-}
-template<class T>
-T& Student<T>::getName()
-{
-  return Name;
-}
-//Set Functions
-template<class T>
-void Student<T>::setContact(T e)
-{
-  Email = e;
-}
-template<class T>
-void Student<T>::setName(T n)
-{
-  Name = n;
-}
-//Pointer Functions
-template<class T>
-Request<T>* Student<T>::getRequests()
-{
-  return request;
-}
-template<class T>
-void Student<T>::setRequest(Request<string> *r)
-{
-  request = r;
+  tutor = t;
 }
